@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: gitops-demo
-        image: sanju9067/gitops-demo:faa4751b0681881ee7cacbd54aa92344780863c0
+        image: sanju9067/gitops-demo:a3a1f623511c4a9cef135474b113b85e79397bb3
         imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
