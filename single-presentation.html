@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitOps Demo Presentation</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #111827;
+      --panel-2: #1f2937;
+      --text: #e5e7eb;
+      --muted: #a5b4c9;
+      --accent: #7dd3fc;
+      --accent-2: #34d399;
+      --warning: #fbbf24;
+      --danger: #f87171;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0b1020, #111827 45%, #0f172a);
+      color: var(--text);
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      padding: 28px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .slide {
+      background: rgba(17, 24, 39, 0.96);
+      border: 1px solid rgba(148,163,184,0.18);
+      border-radius: 18px;
+      box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+      padding: 42px 54px;
+      margin-bottom: 28px;
+      position: relative;
+      overflow: hidden;
+      min-height: 700px;
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 8px;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 34px;
+      line-height: 1.2;
+    }
+
+    h2 {
+      font-size: 30px;
+      color: #f8fafc;
+    }
+
+    h3 {
+      font-size: 22px;
+      color: var(--accent);
+    }
+
+    p, li {
+      font-size: 20px;
+      line-height: 1.6;
+      color: var(--text);
+    }
+
+    ul, ol {
+      margin: 12px 0 0 24px;
+      padding: 0;
+    }
+
+    li {
+      margin: 8px 0;
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(52, 211, 153, 0.12);
+      border: 1px solid rgba(52, 211, 153, 0.28);
+      color: var(--accent-2);
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 26px;
+      margin-top: 18px;
+    }
+
+    .card {
+      background: rgba(31, 41, 55, 0.82);
+      border: 1px solid rgba(148,163,184,0.18);
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-top: 18px;
+    }
+
+    .accent {
+      color: var(--accent-2);
+      font-weight: 700;
+    }
+
+    .warning {
+      color: var(--warning);
+      font-weight: 700;
+    }
+
+    .footer {
+      position: absolute;
+      right: 26px;
+      bottom: 18px;
+      color: var(--muted);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <section class="slide">
+      <div class="badge">BITS WILP</div>
+      <h1>Design and Evaluation of a Secure GitOps CI/CD Pipeline<br>with Automated Rollback using ArgoCD and Prometheus</h1>
+      <p class="muted">Mid-term dissertation presentation</p>
+
+      <div class="two-col">
+        <div class="card">
+          <h3>Project Objective</h3>
+          <p>To build a GitOps workflow that keeps deployment state controlled through Git and reconciled automatically in Kubernetes.</p>
+        </div>
+        <div class="card">
+          <h3>Core Idea</h3>
+          <p>Git is the source of truth, Kubernetes runs the app, and ArgoCD ensures the cluster matches the repository state.</p>
+        </div>
+      </div>
+      <div class="footer">Slide 1</div>
+    </section>
+
+    <section class="slide">
+      <h2>1. Problem Statement</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Traditional CI/CD</h3>
+          <ul>
+            <li>Deployments happen directly to infrastructure</li>
+            <li>Configuration drift is common</li>
+            <li>Recovery is slow and manual</li>
+            <li>Rollback and audits are harder</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>GitOps Advantage</h3>
+          <ul>
+            <li>Git becomes the source of truth</li>
+            <li>Deployments are declarative and versioned</li>
+            <li>Drift is detected automatically</li>
+            <li>Recovery is faster and more reliable</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 22px;"><span class="accent">Key message:</span> GitOps improves reliability, traceability, and recovery in modern cloud-native systems.</p>
+      <div class="footer">Slide 2</div>
+    </section>
+
+    <section class="slide">
+      <h2>2. Motivation</h2>
+      <div class="card">
+        <p>In production environments, application delivery must be fast but also safe and recoverable. Modern teams need a deployment model that supports automation, versioning, and clear operational control. GitOps provides this by treating Git as the system of record.</p>
+      </div>
+      <div class="two-col">
+        <div class="card">
+          <h3>Required Benefits</h3>
+          <ul>
+            <li>Faster deployment cycles</li>
+            <li>Lower operational risk</li>
+            <li>Better traceability</li>
+            <li>Stronger incident recovery</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Technical Advantage</h3>
+          <ul>
+            <li>Declarative infrastructure</li>
+            <li>Continuous reconciliation</li>
+            <li>Improved consistency</li>
+            <li>Observability and health checks</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer">Slide 3</div>
+    </section>
+
+    <section class="slide">
+      <h2>3. Proposed Architecture</h2>
+      <div class="card">
+        <p><span class="accent">GitHub</span> stores source code and Kubernetes manifests.</p>
+        <p><span class="accent">GitHub Actions</span> builds and validates the Docker image.</p>
+        <p><span class="accent">ArgoCD</span> syncs the live cluster state with Git.</p>
+        <p><span class="accent">Kubernetes</span> runs the application and maintains deployment state.</p>
+        <p><span class="accent">Prometheus and Grafana</span> monitor and visualize system health.</p>
+      </div>
+      <p style="margin-top: 18px;">This model separates the desired state from the live state and continuously reconciles them.</p>
+      <div class="footer">Slide 4</div>
+    </section>
+
+    <section class="slide">
+      <h2>4. Deployment Flow</h2>
+      <div class="card">
+        <ol>
+          <li>Developer pushes updates to GitHub.</li>
+          <li>GitHub Actions builds the container image.</li>
+          <li>Docker packages the application.</li>
+          <li>Kubernetes manifests define the desired state.</li>
+          <li>ArgoCD compares actual and desired state.</li>
+          <li>ArgoCD reconciles the cluster to match Git.</li>
+        </ol>
+      </div>
+      <p style="margin-top: 18px;"><span class="warning">Important:</span> The deployment is controlled through Git, not by direct manual changes to the live environment.</p>
+      <div class="footer">Slide 5</div>
+    </section>
+
+    <section class="slide">
+      <h2>5. Demo Flow</h2>
+      <div class="card">
+        <ol>
+          <li>Show cluster status: <span class="muted">kubectl get pods -A</span></li>
+          <li>Show deployment and service: <span class="muted">kubectl get deployment</span> and <span class="muted">kubectl get svc</span></li>
+          <li>Open the app using the Kubernetes service</li>
+          <li>Check health endpoint: <span class="muted">curl http://localhost:8080/health</span></li>
+          <li>Explain ArgoCD reconciliation</li>
+          <li>Conclude the pipeline is functioning end-to-end</li>
+        </ol>
+      </div>
+      <p style="margin-top: 18px;">Expected outcome: the service is live, healthy, and consistent with the Git-based desired state.</p>
+      <div class="footer">Slide 6</div>
+    </section>
+
+    <section class="slide">
+      <h2>6. Monitoring and Reliability</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Prometheus</h3>
+          <ul>
+            <li>Collects metrics from workloads</li>
+            <li>Tracks health and uptime</li>
+            <li>Supports alerting logic</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Grafana</h3>
+          <ul>
+            <li>Visualizes runtime behavior</li>
+            <li>Presents operational trends</li>
+            <li>Improves system observability</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 18px;">Health endpoints and monitoring improve reliability by making failures easier to detect and respond to.</p>
+      <div class="footer">Slide 7</div>
+    </section>
+
+    <section class="slide">
+      <h2>7. What Is Implemented</h2>
+      <div class="card">
+        <ul>
+          <li>Containerized application using Docker</li>
+          <li>Kubernetes deployment and service manifest</li>
+          <li>Health check and readiness/liveness probes</li>
+          <li>GitOps-style deployment architecture</li>
+          <li>ArgoCD integration</li>
+          <li>Monitoring with Prometheus and Grafana</li>
+        </ul>
+      </div>
+      <p style="margin-top: 18px;">This represents a working prototype and a strong foundation for the final dissertation phase.</p>
+      <div class="footer">Slide 8</div>
+    </section>
+
+    <section class="slide">
+      <h2>8. Future Work</h2>
+      <div class="two-col">
+        <div class="card">
+          <h3>Planned Enhancements</h3>
+          <ul>
+            <li>Automated rollback logic</li>
+            <li>Alert threshold tuning</li>
+            <li>Comparison with traditional CI/CD</li>
+            <li>Stronger evaluation chapter</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Expected Outcome</h3>
+          <ul>
+            <li>More resilient deployments</li>
+            <li>Improved recovery time</li>
+            <li>Stronger security posture</li>
+            <li>Better operational evidence</li>
+          </ul>
+        </div>
+      </div>
+      <p style="margin-top: 18px;">The current prototype proves the concept; the next phase strengthens robustness and formal analysis.</p>
+      <div class="footer">Slide 9</div>
+    </section>
+
+    <section class="slide">
+      <h2>9. Closing Statement</h2>
+      <div class="card">
+        <p>This project demonstrates a practical GitOps pipeline for cloud-native deployment. By using Git as the source of truth, ArgoCD as the reconciler, and Kubernetes as the runtime environment, the system shows how modern deployment can be versioned, automated, and recoverable.</p>
+      </div>
+      <p style="margin-top: 34px; font-size: 26px; text-align: center; font-weight: 700; color: var(--accent-2);">Thank you.</p>
+      <div class="footer">Slide 10</div>
+    </section>
+
+  </div>
+</body>
+</html>

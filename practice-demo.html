@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitOps Demo Practice</title>
+  <style>
+    :root {
+      --bg: #07111f;
+      --panel: #0f172a;
+      --panel2: #111827;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #7dd3fc;
+      --green: #34d399;
+      --yellow: #fbbf24;
+      --red: #f87171;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(135deg, #07111f, #0f172a 40%, #111827);
+      color: var(--text);
+      padding: 30px;
+    }
+
+    .wrap {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: rgba(17, 24, 39, 0.95);
+      border: 1px solid rgba(148,163,184,0.2);
+      border-radius: 18px;
+      padding: 28px 34px;
+      margin-bottom: 22px;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.22);
+    }
+
+    h1, h2, h3 { margin-top: 0; }
+    h1 { font-size: 32px; margin-bottom: 10px; }
+    h2 { font-size: 26px; margin-bottom: 10px; }
+    h3 { font-size: 20px; color: var(--accent); }
+    p, li, code {
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(52, 211, 153, 0.12);
+      color: var(--green);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      border-radius: 999px;
+      padding: 8px 14px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    .warning {
+      color: var(--yellow);
+      font-weight: 700;
+    }
+
+    .green {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    code {
+      background: rgba(148,163,184,0.12);
+      border: 1px solid rgba(148,163,184,0.2);
+      border-radius: 8px;
+      padding: 2px 8px;
+      color: #f1f5f9;
+    }
+
+    ul, ol {
+      margin-left: 18px;
+      padding-left: 8px;
+    }
+
+    .step {
+      background: rgba(15, 23, 42, 0.9);
+      border-left: 4px solid var(--green);
+      padding: 12px 14px;
+      border-radius: 10px;
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+    <div class="card">
+      <div class="badge">GitOps Demo</div>
+      <h1>Practice Presentation: Secure GitOps CI/CD Pipeline</h1>
+      <p><strong>Project:</strong> Design and Evaluation of a Secure GitOps CI/CD Pipeline with Automated Rollback using ArgoCD and Prometheus</p>
+      <p class="muted">Use this page while practicing your demo and viva.</p>
+    </div>
+
+    <div class="card">
+      <h2>1. What to show in the demo</h2>
+      <div class="step">
+        <strong>Step 1:</strong> Show that the Kubernetes cluster is running.<br>
+        Command: <code>kubectl get pods -A</code>
+      </div>
+      <div class="step">
+        <strong>Step 2:</strong> Show the app deployment and service are active.<br>
+        Commands: <code>kubectl get deployment</code>, <code>kubectl get svc</code>
+      </div>
+      <div class="step">
+        <strong>Step 3:</strong> Open the app in the browser or port-forward the service.<br>
+        Command: <code>kubectl port-forward svc/gitops-demo 8080:80</code>
+      </div>
+      <div class="step">
+        <strong>Step 4:</strong> Verify health endpoint returns success.<br>
+        Command: <code>curl http://localhost:8080/health</code>
+      </div>
+      <div class="step">
+        <strong>Step 5:</strong> Explain GitOps logic: Git is the source of truth and ArgoCD reconciles the cluster to Git.
+      </div>
+      <div class="step">
+        <strong>Step 6:</strong> Mention monitoring with Prometheus/Grafana to show observability and reliability.
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>2. Demo script you can say</h2>
+      <p>
+        “This project demonstrates a GitOps-based CI/CD pipeline. The application itself is simple, but the main value is the deployment architecture. I first show that the Kubernetes cluster is running and the workloads are active. Then I deploy the application, expose it through a service, and verify that it is healthy by checking the health endpoint. The response is successful, which confirms the application is live and available. In a GitOps model, Git acts as the source of truth and ArgoCD continuously reconciles the cluster state with the desired state in the repository. Monitoring tools such as Prometheus and Grafana add visibility and improve operational reliability.”
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>3. Very short viva answer</h2>
+      <p>
+        “This project improves deployment reliability by using GitOps. Instead of manually pushing changes to infrastructure, Git stores the desired state and ArgoCD ensures the cluster remains aligned with it. Kubernetes runs the application, while Prometheus and Grafana provide monitoring and observability. This makes deployments more consistent, auditable, and recoverable.”
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>4. What you should emphasize</h2>
+      <div class="two-col">
+        <div>
+          <h3>Technical points</h3>
+          <ul>
+            <li>Dockerized app</li>
+            <li>Kubernetes deployment</li>
+            <li>ArgoCD reconciliation</li>
+            <li>Health checks</li>
+            <li>Monitoring and observability</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Research points</h3>
+          <ul>
+            <li>Why GitOps matters</li>
+            <li>How it reduces drift</li>
+            <li>How it improves recovery</li>
+            <li>How it supports secure deployment</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>5. Important panel questions and answers</h2>
+
+      <p><span class="warning">Q:</span> Why is this project not too complex?</p>
+      <p><span class="green">A:</span> Because the purpose is to demonstrate the deployment architecture and GitOps model, not to build a complex app.</p>
+
+      <p><span class="warning">Q:</span> Why GitOps?</p>
+      <p><span class="green">A:</span> Because GitOps provides declarative, version-controlled, and recoverable deployments.</p>
+
+      <p><span class="warning">Q:</span> What is the final goal?</p>
+      <p><span class="green">A:</span> To build a secure, observable, and resilient deployment pipeline with future rollback support.</p>
+    </div>
+
+    <div class="card">
+      <h2>6. Final practice tip</h2>
+      <p>Do not speak too fast. Start with the architecture, show the live app, explain the health check, and end by connecting it to GitOps benefits.</p>
+      <p><strong>Simple formula:</strong> Problem → Architecture → Demo → Why it matters → Future work.</p>
+    </div>
+
+  </div>
+</body>
+</html>

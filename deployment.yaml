@@ -14,6 +14,25 @@ spec:
     spec:
       containers:
       - name: gitops-demo
-        image: sanju9067/gitops-demo:v1
+        image: sanju9067/gitops-demo:v2
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: 80
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 10
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 80
+          initialDelaySeconds: 10
+          periodSeconds: 15
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 80
+          failureThreshold: 30
+          periodSeconds: 5
